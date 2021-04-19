@@ -1,24 +1,19 @@
 with customers as (
 
-    select
-        id as customer_id,
-        first_name,
-        last_name
+--    select
+--        id as customer_id,
+--        first_name,
+--        last_name
+--    from `dbt-tutorial`.jaffle_shop.customers
 
-    from `dbt-tutorial`.jaffle_shop.customers
+--  In this way we created a specific SQL command in the stg_customers model, and from here we call that moodel
+--  Names must exactly match
+    select * from {{ ref('stg_customers') }}
 
 ),
 
 orders as (
-
-    select
-        id as order_id,
-        user_id as customer_id,
-        order_date,
-        status
-
-    from `dbt-tutorial`.jaffle_shop.orders
-
+    select * from {{ ref('stg_orders') }}
 ),
 
 customer_orders as (
